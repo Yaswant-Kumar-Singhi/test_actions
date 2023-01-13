@@ -17,7 +17,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: echo Hello, world-1!
+        id: run_tests_1
         
       - name: Run a secong-line script
-        run: echo Hello, world-new!
+        run: steps.run_tests_1.output
