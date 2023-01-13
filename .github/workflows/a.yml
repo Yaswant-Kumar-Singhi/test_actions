@@ -20,5 +20,8 @@ jobs:
         run: echo Hello, world-1!
         id: run_tests_1
         
+      
       - name: Run a secong-line script
-        run: ${{ steps.run_tests_1.output}}
+        env:
+          a : ${{join(steps.run_tests.outputs.*, '\n')}}
+        run: echo $a
