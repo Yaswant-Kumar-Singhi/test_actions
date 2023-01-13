@@ -23,5 +23,5 @@ jobs:
       
       - name: Run a secong-line script
         env:
-          a : "new env"
+          a : "$steps.run_tests_1.output.*"
         run: echo "$a"
