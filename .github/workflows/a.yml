@@ -7,6 +7,10 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+  
+    outputs:
+      output1: ${{ steps.run_tests_1.outputs.test }}
+    
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -17,11 +21,10 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world-1!
-        id: run_tests_1
+        id: run_tests_1 
+        run: echo Hello, world-1! >> $GITHUB_OUTPUT
+        
         
       
       - name: Run a secong-line script
-        env:
-          a : "$steps.run_tests_1.output.*"
-        run: echo "$a"
+        run: echo $steps.run_tests_1.outputs.output1
