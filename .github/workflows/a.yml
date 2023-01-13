@@ -23,5 +23,5 @@ jobs:
       
       - name: Run a secong-line script
         env:
-          a : "${{join(steps.run_tests_1.outputs.*, '\n')}}"
+          a : "new env"
         run: echo "$a"
