@@ -1,4 +1,4 @@
-name: test
+name: test-tag deploy
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ jobs:
     
     #if:   "contains(github.ref,'tags')" #${{ github.ref == 'refs/heads/main' || "contains(github.ref,'tags')" }}
     
-    if: "contains('tags',github.ref)"
+    if: "contains(github.ref,'tags')"
     
     runs-on: ubuntu-latest
 
