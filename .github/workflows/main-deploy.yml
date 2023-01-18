@@ -40,7 +40,7 @@ jobs:
     
     #if:   "contains(github.ref,'tags')" #${{ github.ref == 'refs/heads/main' || "contains(github.ref,'tags')" }}
     
-    if: "contains(github.ref,'main') && !contains(inputs.subcription,'prod')"
+    if: "contains(github.ref,'main') && contains(inputs.subcription,'nonprod')"
     
     runs-on: ubuntu-latest
 
