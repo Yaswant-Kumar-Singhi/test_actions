@@ -13,12 +13,12 @@ jobs:
   build:
     # The type of runner that the job will run on
     
-    if:   "contains(github.ref,'tags')" #${{ github.ref == 'refs/heads/main' || "contains(github.ref,'tags')" }}
+    #if:   "contains(github.ref,'tags')" #${{ github.ref == 'refs/heads/main' || "contains(github.ref,'tags')" }}
     
-    #if: contains('
-    #      refs/heads/main
-    #      refs/tags/ github.ref == 'refs/tags/*'
-    #    ',github.ref)    
+    if: contains('
+          refs/heads/main
+          tags
+        ',github.ref)    
     
     #  {{ "contains(github.ref,'release')" || "contains(github.ref,'main')" }} # github.ref == 'refs/heads/main' # or 
     
