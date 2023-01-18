@@ -3,10 +3,22 @@ name: test
 on:
   workflow_dispatch:
     inputs:
-      t_v : 
-        description: tag version
+      deploy_env : 
+        type: choice
+        description: Select the Env to deploy 
         required: true
-        default : '0.0.1'
+        default : 'build'
+        options: 
+          - build
+          - dev
+      fn_app_name : 
+        type: choice
+        description: Function App Name
+        required: true
+        default : 'build'
+        options: 
+          - dmp-fnapp-runway-build-001
+          - dmp-fnapp-runway-dev-001
   
 jobs:
   # This workflow contains a single job called "build"
@@ -15,13 +27,9 @@ jobs:
     
     #if:   "contains(github.ref,'tags')" #${{ github.ref == 'refs/heads/main' || "contains(github.ref,'tags')" }}
     
-    if: |
-      contains('refs/heads/main',github.ref) ||
-      contains('tags',github.ref)
+    if: "contains(github.ref,'feature')"
              
-    
-    #  {{ "contains(github.ref,'release')" || "contains(github.ref,'main')" }} # github.ref == 'refs/heads/main' # or 
-    
+        
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -30,5 +38,8 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Env Name
+        run: echo ${{github.event.inputs.deploy_env}}
+        
+      - name: Fnapp Name
+        run: echo ${{github.event.inputs.fn_app_name}}
