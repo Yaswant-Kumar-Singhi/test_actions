@@ -41,7 +41,11 @@ jobs:
     #if:   "contains(github.ref,'tags')" #${{ github.ref == 'refs/heads/main' || "contains(github.ref,'tags')" }}
     
     # if: "contains(github.ref,'main') && contains(inputs.subcription,'nonprod')"
-    if: github.ref == 'refs/heads/main' && github.event.inputs.subcription == 'nonprod'
+    if: |
+      github.ref == 'refs/heads/main' && 
+      github.event.inputs.subcription == 'nonprod' &&
+      (github.event.inputs.deploy_env == 'build' || github.event.inputs.deploy_env == 'dev' || github.event.inputs.deploy_env == 'test')
+      
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
