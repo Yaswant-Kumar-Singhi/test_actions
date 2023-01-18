@@ -11,8 +11,7 @@ jobs:
     if: contains('
           refs/heads/main
           refs/tag/
-        ',github.ref)
-    
+        ',github.ref)    
     
     #  {{ "contains(github.ref,'release')" || "contains(github.ref,'main')" }} # github.ref == 'refs/heads/main' # or 
     
