@@ -1,4 +1,4 @@
-name: test
+name: feature-branch deploy
 
 on:
   workflow_dispatch:
@@ -17,8 +17,8 @@ on:
         required: true
         default : 'build'
         options: 
-          - dmp-fnapp-runway-build-001
-          - dmp-fnapp-runway-dev-001
+          - fnapp-build-001
+          - fnapp-dev-001
   
 jobs:
   # This workflow contains a single job called "build"
