@@ -44,7 +44,9 @@ jobs:
     if: |
       github.ref == 'refs/heads/main' && 
       github.event.inputs.subcription == 'nonprod' &&
-      (github.event.inputs.deploy_env == 'build' || github.event.inputs.deploy_env == 'dev' || github.event.inputs.deploy_env == 'test')
+      (github.event.inputs.deploy_env == 'build' && github.event.inputs.fn_app_name =='fnapp-build-001'|| 
+       github.event.inputs.deploy_env == 'dev'   && github.event.inputs.fn_app_name =='fnapp-dev-001'|| 
+       github.event.inputs.deploy_env == 'test'  && github.event.inputs.fn_app_name =='fnapp-test-001')
       
     runs-on: ubuntu-latest
 
