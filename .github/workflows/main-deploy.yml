@@ -1,0 +1,80 @@
+name: main-branch deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      subcription : 
+        type: choice
+        description: Select Non-prod or Prod 
+        required: true
+        default : 'nonprod'
+        options: 
+          - nonprod
+          - prod
+      deploy_env : 
+        type: choice
+        description: Select the Env to deploy 
+        required: true
+        default : 'build'
+        options: 
+          - build
+          - dev
+          - test
+          - stage
+      fn_app_name : 
+        type: choice
+        description: Function App Name
+        required: true
+        default : 'build'
+        options: 
+          - fnapp-build-001
+          - fnapp-dev-001
+          - fnapp-test-001
+          - fnapp-stage-001
+       
+  
+jobs:
+  # This workflow contains a single job called "build"
+  build-deploy-Nonprod:
+    # The type of runner that the job will run on
+    
+    #if:   "contains(github.ref,'tags')" #${{ github.ref == 'refs/heads/main' || "contains(github.ref,'tags')" }}
+    
+    if: "contains(github.ref,'main') && !contains(inputs.subcription,'prod')"
+    
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Sub Name
+        run: echo ${{github.event.inputs.subcription}}
+      
+      - name: Env Name
+        run: echo ${{github.event.inputs.deploy_env}}
+        
+      - name: Fnapp Name
+        run: echo ${{github.event.inputs.fn_app_name}}
+
+  build-deploy-prod:
+    if: "contains(github.ref,'main') && contains(inputs.subcription,'prod')"
+    
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Sub Name
+        run: echo ${{github.event.inputs.subcription}}
+      
+      - name: Env Name
+        run: echo ${{github.event.inputs.deploy_env}}
+        
+      - name: Fnapp Name
+        run: echo ${{github.event.inputs.fn_app_name}}
