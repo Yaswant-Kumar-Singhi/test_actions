@@ -60,8 +60,8 @@ jobs:
         run: echo ${{github.event.inputs.fn_app_name}}
 
   build-deploy-prod:
-    if: "contains(github.ref,'main') && contains(inputs.subcription,'prod')"
-    
+    # if: "contains(github.ref,'main') && contains(inputs.subcription,'prod')"
+    if: github.ref == 'refs/heads/main' && github.event.inputs.subcription == 'prod'
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
